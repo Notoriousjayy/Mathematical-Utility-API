@@ -9,1327 +9,6 @@
     "url" : "/"
   } ],
   "paths" : {
-    "/grid/{gridId}" : {
-      "put" : {
-        "summary" : "Update the entire grid",
-        "description" : "Replaces the existing grid with the one provided in the request body.",
-        "parameters" : [ {
-          "name" : "gridId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string",
-            "description" : "The unique identifier of the grid to update."
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Grid"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Grid updated successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Grid"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "Invalid request format."
-          },
-          "404" : {
-            "description" : "Grid not found."
-          }
-        }
-      },
-      "patch" : {
-        "summary" : "Update parts of the grid",
-        "description" : "Applies partial updates to the grid identified by the gridId, such as changing specific cells with new or updated GameEntity instances.",
-        "parameters" : [ {
-          "name" : "gridId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string",
-            "description" : "The unique identifier of the grid to be partially updated."
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/grid_gridId_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Grid partially updated successfully."
-          },
-          "400" : {
-            "description" : "Invalid request format."
-          },
-          "404" : {
-            "description" : "Grid not found."
-          }
-        }
-      }
-    },
-    "/units/{unitId}/position" : {
-      "get" : {
-        "summary" : "Get a unit's current position.",
-        "parameters" : [ {
-          "name" : "unitId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Current unit position.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Point"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put" : {
-        "summary" : "Update a unit's position.",
-        "parameters" : [ {
-          "name" : "unitId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/unitId_position_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Unit position updated successfully."
-          }
-        }
-      }
-    },
-    "/entities/skeleton" : {
-      "post" : {
-        "summary" : "Create a new skeleton entity",
-        "description" : "Creates a new skeleton with the specified properties.",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Skeleton"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "201" : {
-            "description" : "Skeleton created successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Skeleton"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "Invalid request data."
-          }
-        }
-      }
-    },
-    "/gameActor/{actorId}/position" : {
-      "put" : {
-        "summary" : "Update the position of a game actor",
-        "parameters" : [ {
-          "name" : "actorId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Point"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "GameActor's position updated successfully."
-          }
-        }
-      }
-    },
-    "/entity/{entityId}/position" : {
-      "put" : {
-        "summary" : "Update an entity's position",
-        "parameters" : [ {
-          "name" : "entityId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Point"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Entity's position updated successfully."
-          }
-        }
-      }
-    },
-    "/entities/statue" : {
-      "post" : {
-        "summary" : "Create a new statue entity",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Statue"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "201" : {
-            "description" : "Statue entity created successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Statue"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/entities/skeleton/{entityId}/update" : {
-      "post" : {
-        "summary" : "Update the state of a skeleton entity",
-        "parameters" : [ {
-          "name" : "entityId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Skeleton"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Skeleton entity updated successfully."
-          }
-        }
-      }
-    },
-    "/commands/jump/undo" : {
-      "post" : {
-        "summary" : "Undo a jump command for a game actor",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/JumpCommandRequest"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Jump command undone successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_72"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/commands/jump/execute" : {
-      "post" : {
-        "summary" : "Execute a jump command for a game actor",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/JumpCommandRequest"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Jump command executed successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_73"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/input/bindCommand" : {
-      "post" : {
-        "summary" : "Bind a command to a button",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/CommandBinding"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Command bound to button successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_74"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/input/command" : {
-      "post" : {
-        "summary" : "Process an input command for a game unit",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/InputCommand"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Input command processed successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_75"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/grid" : {
-      "get" : {
-        "summary" : "Get the current state of the grid",
-        "responses" : {
-          "200" : {
-            "description" : "The current state of the grid.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Grid"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post" : {
-        "summary" : "Create a new grid",
-        "description" : "Creates a new grid with the specified dimensions and initial unit placements.",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/grid_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "201" : {
-            "description" : "Grid created successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Grid"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "Invalid request data."
-          }
-        }
-      }
-    },
-    "/gameEntity/{entityId}/components" : {
-      "get" : {
-        "summary" : "Get components of a game entity",
-        "parameters" : [ {
-          "name" : "entityId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Components of the GameEntity fetched successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_76"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/gameActor/{actorId}/fire" : {
-      "post" : {
-        "summary" : "Command the game actor to fire",
-        "parameters" : [ {
-          "name" : "actorId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "GameActor fired successfully."
-          }
-        }
-      }
-    },
-    "/commands/fire/undo" : {
-      "post" : {
-        "summary" : "Undo a fire command on a game actor",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/FireCommand"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Fire command undone successfully",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_77"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/commands/fire" : {
-      "post" : {
-        "summary" : "Execute a fire command on a game actor",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/FireCommand"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Fire command executed successfully",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_78"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/entity/{entityId}/renderData" : {
-      "get" : {
-        "summary" : "Get data necessary for rendering an entity",
-        "parameters" : [ {
-          "name" : "entityId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Data for rendering the entity.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/entity/{entityId}/update" : {
-      "post" : {
-        "summary" : "Update an entity's state",
-        "parameters" : [ {
-          "name" : "entityId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/EntityProperties"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Entity updated successfully."
-          }
-        }
-      }
-    },
-    "/commands/execute" : {
-      "post" : {
-        "summary" : "Execute a command",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Command"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Command executed successfully",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_79"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/command/execute" : {
-      "post" : {
-        "summary" : "Execute a command for an entity",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Command"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Command executed successfully."
-          }
-        }
-      }
-    },
-    "/entity/move" : {
-      "post" : {
-        "summary" : "Move an entity to a new position",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/entity_move_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Entity moved successfully."
-          }
-        }
-      }
-    },
-    "/unit/move" : {
-      "post" : {
-        "summary" : "Move a unit to a new position",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/MoveUnitCommand"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Unit moved successfully"
-          }
-        }
-      }
-    },
-    "/gameEntity/{entityId}/position" : {
-      "put" : {
-        "summary" : "Update the position of a game entity",
-        "parameters" : [ {
-          "name" : "entityId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Point"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Successfully updated the entity's position."
-          }
-        }
-      }
-    },
-    "/command" : {
-      "post" : {
-        "summary" : "Execute a command",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Command"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Command executed successfully."
-          }
-        }
-      }
-    },
-    "/gameEntity" : {
-      "post" : {
-        "summary" : "Create a new game entity",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/GameEntity"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "201" : {
-            "description" : "Successfully created a new game entity.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GameEntity"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/orientedRectangleOrientedRectangleIntersection" : {
-      "post" : {
-        "summary" : "Check if two oriented rectangles intersect",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/orientedRectangleOrientedRectangleIntersection_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the two oriented rectangles intersect",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_80"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rectangleOrientedRectangleIntersection" : {
-      "post" : {
-        "summary" : "Check if a rectangle intersects with an oriented rectangle",
-        "operationId" : "rectangleOrientedRectangleIntersection",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/rectangleOrientedRectangleIntersection_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the rectangle intersects with the oriented rectangle",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_80"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rectangleRectangleSAT" : {
-      "post" : {
-        "summary" : "Check if two rectangles intersect using SAT",
-        "operationId" : "rectangleRectangleSAT",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/rectangleRectangleSAT_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the two rectangles intersect using SAT",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_80"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rectangleRectangleIntersection" : {
-      "post" : {
-        "summary" : "Check if two rectangles intersect",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/rectangleRectangleIntersection_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the two rectangles intersect",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_80"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/circleOrientedRectangleIntersection" : {
-      "post" : {
-        "summary" : "Check if a circle intersects with an oriented rectangle",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/circleOrientedRectangleIntersection_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the circle intersects with the oriented rectangle",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_80"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/circleRectangleIntersection" : {
-      "post" : {
-        "summary" : "Check if a circle intersects with a rectangle",
-        "operationId" : "circleRectangleIntersection",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/circleRectangleIntersection_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the circle intersects with the rectangle",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_80"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/circleCircleIntersection" : {
-      "post" : {
-        "summary" : "Check if two circles intersect",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/circleCircleIntersection_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the two circles intersect",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_80"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/createPolyLine" : {
-      "post" : {
-        "summary" : "Create a new PolyLine",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/PolyLine"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "201" : {
-            "description" : "PolyLine created successfully",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PolyLine"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/lineOrientedRectangleIntersection" : {
-      "post" : {
-        "summary" : "Check if a line intersects with an oriented rectangle",
-        "operationId" : "lineOrientedRectangleIntersection",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/lineOrientedRectangleIntersection_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the line intersects with the oriented rectangle",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_80"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/lineRectangleIntersection" : {
-      "post" : {
-        "summary" : "Check if a line intersects with a rectangle",
-        "operationId" : "lineRectangleIntersection",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/lineRectangleIntersection_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the line intersects with the rectangle",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_80"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/lineCircleIntersection" : {
-      "post" : {
-        "summary" : "Check if a line intersects with a circle",
-        "operationId" : "lineCircleIntersection",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/lineCircleIntersection_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the line intersects with the circle",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_80"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/pointInOrientedRectangle" : {
-      "post" : {
-        "summary" : "Check if a point is inside a given oriented rectangle",
-        "operationId" : "pointInOrientedRectangle",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/pointInOrientedRectangle_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the point is inside the oriented rectangle",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_81"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/pointInRectangle" : {
-      "post" : {
-        "summary" : "Check if a point is inside a given rectangle",
-        "operationId" : "pointInRectangle",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/pointInRectangle_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the point is inside the rectangle",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_82"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/pointInCircle" : {
-      "post" : {
-        "summary" : "Check if a point is inside a given circle",
-        "operationId" : "pointInCircle",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/pointInCircle_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "A boolean indicating if the point is inside the circle",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_83"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/orientedRectangle" : {
-      "post" : {
-        "tags" : [ "Geometric Calculations" ],
-        "summary" : "Create a new OrientedRectangle",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/OrientedRectangle"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "201" : {
-            "description" : "OrientedRectangle created successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_201"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/orientedRectangle/{id}" : {
-      "get" : {
-        "tags" : [ "Geometric Calculations" ],
-        "summary" : "Retrieve an existing OrientedRectangle by ID",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OrientedRectangle retrieved successfully.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/OrientedRectangle"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "Geometric Calculations" ],
-        "summary" : "Update an existing OrientedRectangle by ID",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/OrientedRectangle"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "OrientedRectangle updated successfully."
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "Geometric Calculations" ],
-        "summary" : "Delete an existing OrientedRectangle by ID",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OrientedRectangle deleted successfully."
-          }
-        }
-      }
-    },
-    "/rectangle/create" : {
-      "post" : {
-        "tags" : [ "Geometric Calculations" ],
-        "summary" : "Create a new Rectangle2D object",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Rectangle2D"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "201" : {
-            "description" : "The rectangle was successfully created.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_201_1"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rectangle/update/position" : {
-      "patch" : {
-        "tags" : [ "Geometric Calculations" ],
-        "summary" : "Update the position of an existing Rectangle2D object",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/update_position_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "The rectangle's position was successfully updated."
-          }
-        }
-      }
-    },
-    "/rectangle/update/size" : {
-      "patch" : {
-        "tags" : [ "Geometric Calculations" ],
-        "summary" : "Update the size of an existing Rectangle2D object",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/update_size_body"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "The rectangle's size was successfully updated."
-          }
-        }
-      }
-    },
     "/accelerate-series" : {
       "post" : {
         "tags" : [ "Mathematical Operations" ],
@@ -2246,6 +925,91 @@
         }
       }
     },
+    "/circleCircleIntersection" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if two circles intersect",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/circleCircleIntersection_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the two circles intersect",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_80"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/circleOrientedRectangleIntersection" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if a circle intersects with an oriented rectangle",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/circleOrientedRectangleIntersection_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the circle intersects with the oriented rectangle",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_80"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/circleRectangleIntersection" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if a circle intersects with a rectangle",
+        "operationId" : "circleRectangleIntersection",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/circleRectangleIntersection_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the circle intersects with the rectangle",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_80"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/circumcircle" : {
       "post" : {
         "tags" : [ "Geometric Calculations" ],
@@ -2352,6 +1116,188 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/StatisticalTestResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/command" : {
+      "post" : {
+        "tags" : [ "Command Processing" ],
+        "summary" : "Execute a command",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Command"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Command executed successfully."
+          }
+        }
+      }
+    },
+    "/command/execute" : {
+      "post" : {
+        "tags" : [ "Command Processing" ],
+        "summary" : "Execute a command for an entity",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Command"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Command executed successfully."
+          }
+        }
+      }
+    },
+    "/commands/execute" : {
+      "post" : {
+        "tags" : [ "Command Processing" ],
+        "summary" : "Execute a command",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Command"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Command executed successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_79"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/commands/fire" : {
+      "post" : {
+        "tags" : [ "Command Processing" ],
+        "summary" : "Execute a fire command on a game actor",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/FireCommand"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Fire command executed successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_78"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/commands/fire/undo" : {
+      "post" : {
+        "tags" : [ "Command Processing" ],
+        "summary" : "Undo a fire command on a game actor",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/FireCommand"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Fire command undone successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_77"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/commands/jump/execute" : {
+      "post" : {
+        "tags" : [ "Command Processing" ],
+        "summary" : "Execute a jump command for a game actor",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/JumpCommandRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Jump command executed successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_73"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/commands/jump/undo" : {
+      "post" : {
+        "tags" : [ "Command Processing" ],
+        "summary" : "Undo a jump command for a game actor",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/JumpCommandRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Jump command undone successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_72"
                 }
               }
             }
@@ -2629,6 +1575,34 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/PSPageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/createPolyLine" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Create a new PolyLine",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PolyLine"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "PolyLine created successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PolyLine"
                 }
               }
             }
@@ -3187,6 +2161,208 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/entities/skeleton" : {
+      "post" : {
+        "tags" : [ "Entity Management" ],
+        "summary" : "Create a new skeleton entity",
+        "description" : "Creates a new skeleton with the specified properties.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Skeleton"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Skeleton created successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Skeleton"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request data."
+          }
+        }
+      }
+    },
+    "/entities/skeleton/{entityId}/update" : {
+      "post" : {
+        "tags" : [ "Entity Management" ],
+        "summary" : "Update the state of a skeleton entity",
+        "parameters" : [ {
+          "name" : "entityId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Skeleton"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Skeleton entity updated successfully."
+          }
+        }
+      }
+    },
+    "/entities/statue" : {
+      "post" : {
+        "tags" : [ "Entity Management" ],
+        "summary" : "Create a new statue entity",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Statue"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Statue entity created successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Statue"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entity/move" : {
+      "post" : {
+        "tags" : [ "Movement and Positioning" ],
+        "summary" : "Move an entity to a new position",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/entity_move_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Entity moved successfully."
+          }
+        }
+      }
+    },
+    "/entity/{entityId}/position" : {
+      "put" : {
+        "tags" : [ "Movement and Positioning" ],
+        "summary" : "Update an entity's position",
+        "parameters" : [ {
+          "name" : "entityId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Point"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Entity's position updated successfully."
+          }
+        }
+      }
+    },
+    "/entity/{entityId}/renderData" : {
+      "get" : {
+        "tags" : [ "Movement and Positioning" ],
+        "summary" : "Get data necessary for rendering an entity",
+        "parameters" : [ {
+          "name" : "entityId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Data for rendering the entity.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entity/{entityId}/update" : {
+      "post" : {
+        "tags" : [ "Movement and Positioning" ],
+        "summary" : "Update an entity's state",
+        "parameters" : [ {
+          "name" : "entityId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EntityProperties"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Entity updated successfully."
           }
         }
       }
@@ -4039,6 +3215,145 @@
         }
       }
     },
+    "/gameActor/{actorId}/fire" : {
+      "post" : {
+        "tags" : [ "Actor Actions" ],
+        "summary" : "Command the game actor to fire",
+        "parameters" : [ {
+          "name" : "actorId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "GameActor fired successfully."
+          }
+        }
+      }
+    },
+    "/gameActor/{actorId}/position" : {
+      "put" : {
+        "tags" : [ "Actor Actions" ],
+        "summary" : "Update the position of a game actor",
+        "parameters" : [ {
+          "name" : "actorId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Point"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "GameActor's position updated successfully."
+          }
+        }
+      }
+    },
+    "/gameEntity" : {
+      "post" : {
+        "tags" : [ "Entity Management" ],
+        "summary" : "Create a new game entity",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/GameEntity"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Successfully created a new game entity.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GameEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gameEntity/{entityId}/components" : {
+      "get" : {
+        "tags" : [ "Entity Management" ],
+        "summary" : "Get components of a game entity",
+        "parameters" : [ {
+          "name" : "entityId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Components of the GameEntity fetched successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_76"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gameEntity/{entityId}/position" : {
+      "put" : {
+        "tags" : [ "Entity Management" ],
+        "summary" : "Update the position of a game entity",
+        "parameters" : [ {
+          "name" : "entityId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Point"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successfully updated the entity's position."
+          }
+        }
+      }
+    },
     "/gaussian-mixture-model/estep" : {
       "post" : {
         "tags" : [ "Machine Learning" ],
@@ -4532,6 +3847,137 @@
         }
       }
     },
+    "/grid" : {
+      "get" : {
+        "tags" : [ "Grid Operations" ],
+        "summary" : "Get the current state of the grid",
+        "responses" : {
+          "200" : {
+            "description" : "The current state of the grid.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Grid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Grid Operations" ],
+        "summary" : "Create a new grid",
+        "description" : "Creates a new grid with the specified dimensions and initial unit placements.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/grid_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Grid created successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Grid"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request data."
+          }
+        }
+      }
+    },
+    "/grid/{gridId}" : {
+      "put" : {
+        "tags" : [ "Grid Operations" ],
+        "summary" : "Update the entire grid",
+        "description" : "Replaces the existing grid with the one provided in the request body.",
+        "parameters" : [ {
+          "name" : "gridId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "description" : "The unique identifier of the grid to update."
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Grid"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Grid updated successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Grid"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request format."
+          },
+          "404" : {
+            "description" : "Grid not found."
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "Grid Operations" ],
+        "summary" : "Update parts of the grid",
+        "description" : "Applies partial updates to the grid identified by the gridId, such as changing specific cells with new or updated GameEntity instances.",
+        "parameters" : [ {
+          "name" : "gridId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "description" : "The unique identifier of the grid to be partially updated."
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/grid_gridId_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Grid partially updated successfully."
+          },
+          "400" : {
+            "description" : "Invalid request format."
+          },
+          "404" : {
+            "description" : "Grid not found."
+          }
+        }
+      }
+    },
     "/hash/all-elements" : {
       "post" : {
         "tags" : [ "Data Security and Hashing" ],
@@ -4880,6 +4326,62 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/inline_response_200_30"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/input/bindCommand" : {
+      "post" : {
+        "tags" : [ "Input Handling" ],
+        "summary" : "Bind a command to a button",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CommandBinding"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Command bound to button successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_74"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/input/command" : {
+      "post" : {
+        "tags" : [ "Input Handling" ],
+        "summary" : "Process an input command for a game unit",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/InputCommand"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Input command processed successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_75"
                 }
               }
             }
@@ -5617,6 +5119,93 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/inline_response_200_52"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lineCircleIntersection" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if a line intersects with a circle",
+        "operationId" : "lineCircleIntersection",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/lineCircleIntersection_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the line intersects with the circle",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_80"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lineOrientedRectangleIntersection" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if a line intersects with an oriented rectangle",
+        "operationId" : "lineOrientedRectangleIntersection",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/lineOrientedRectangleIntersection_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the line intersects with the oriented rectangle",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_80"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lineRectangleIntersection" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if a line intersects with a rectangle",
+        "operationId" : "lineRectangleIntersection",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/lineRectangleIntersection_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the line intersects with the rectangle",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_80"
                 }
               }
             }
@@ -7074,6 +6663,138 @@
         }
       }
     },
+    "/orientedRectangle" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Create a new OrientedRectangle",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OrientedRectangle"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "OrientedRectangle created successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orientedRectangle/{id}" : {
+      "get" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Retrieve an existing OrientedRectangle by ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OrientedRectangle retrieved successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/OrientedRectangle"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Update an existing OrientedRectangle by ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OrientedRectangle"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OrientedRectangle updated successfully."
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Delete an existing OrientedRectangle by ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OrientedRectangle deleted successfully."
+          }
+        }
+      }
+    },
+    "/orientedRectangleOrientedRectangleIntersection" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if two oriented rectangles intersect",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/orientedRectangleOrientedRectangleIntersection_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the two oriented rectangles intersect",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_80"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/pearsn" : {
       "post" : {
         "tags" : [ "Statistical and Probabilistic Methods" ],
@@ -7157,6 +6878,93 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/PhylogeneticAnalysisResults"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pointInCircle" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if a point is inside a given circle",
+        "operationId" : "pointInCircle",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/pointInCircle_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the point is inside the circle",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_83"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pointInOrientedRectangle" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if a point is inside a given oriented rectangle",
+        "operationId" : "pointInOrientedRectangle",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/pointInOrientedRectangle_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the point is inside the oriented rectangle",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_81"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pointInRectangle" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if a point is inside a given rectangle",
+        "operationId" : "pointInRectangle",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/pointInRectangle_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the point is inside the rectangle",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_82"
                 }
               }
             }
@@ -8085,6 +7893,162 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/RebinResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rectangle/create" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Create a new Rectangle2D object",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Rectangle2D"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "The rectangle was successfully created.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201_1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rectangle/update/position" : {
+      "patch" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Update the position of an existing Rectangle2D object",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/update_position_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "The rectangle's position was successfully updated."
+          }
+        }
+      }
+    },
+    "/rectangle/update/size" : {
+      "patch" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Update the size of an existing Rectangle2D object",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/update_size_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "The rectangle's size was successfully updated."
+          }
+        }
+      }
+    },
+    "/rectangleOrientedRectangleIntersection" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if a rectangle intersects with an oriented rectangle",
+        "operationId" : "rectangleOrientedRectangleIntersection",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/rectangleOrientedRectangleIntersection_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the rectangle intersects with the oriented rectangle",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_80"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rectangleRectangleIntersection" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if two rectangles intersect",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/rectangleRectangleIntersection_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the two rectangles intersect",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_80"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rectangleRectangleSAT" : {
+      "post" : {
+        "tags" : [ "Geometric Calculations" ],
+        "summary" : "Check if two rectangles intersect using SAT",
+        "operationId" : "rectangleRectangleSAT",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/rectangleRectangleSAT_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "A boolean indicating if the two rectangles intersect using SAT",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_80"
                 }
               }
             }
@@ -9355,6 +9319,84 @@
         }
       }
     },
+    "/unit/move" : {
+      "post" : {
+        "tags" : [ "Movement and Positioning" ],
+        "summary" : "Move a unit to a new position",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MoveUnitCommand"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Unit moved successfully"
+          }
+        }
+      }
+    },
+    "/units/{unitId}/position" : {
+      "get" : {
+        "tags" : [ "Unit Operations" ],
+        "summary" : "Get a unit's current position.",
+        "parameters" : [ {
+          "name" : "unitId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Current unit position.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Point"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Unit Operations" ],
+        "summary" : "Update a unit's position.",
+        "parameters" : [ {
+          "name" : "unitId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/unitId_position_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Unit position updated successfully."
+          }
+        }
+      }
+    },
     "/updateADAT" : {
       "post" : {
         "tags" : [ "Data Updating Methods" ],
@@ -9543,6 +9585,9 @@
             "$ref" : "#/components/schemas/Vector"
           }
         }
+      },
+      "AIComponent" : {
+        "type" : "object"
       },
       "Adapt" : {
         "required" : [ "TOL", "out_of_tolerance", "terminate", "toler" ],
@@ -10072,6 +10117,33 @@
             "type" : "number",
             "description" : "Sine integral Si(x)",
             "format" : "double"
+          }
+        }
+      },
+      "Command" : {
+        "required" : [ "action", "entityId" ],
+        "type" : "object",
+        "properties" : {
+          "entityId" : {
+            "type" : "string"
+          },
+          "action" : {
+            "type" : "string"
+          }
+        },
+        "description" : "Represents an action that can be executed in the game, such as moving an entity or firing a weapon."
+      },
+      "CommandBinding" : {
+        "required" : [ "button", "commandType" ],
+        "type" : "object",
+        "properties" : {
+          "button" : {
+            "type" : "string",
+            "enum" : [ "BUTTON_X", "BUTTON_Y", "BUTTON_A", "BUTTON_B" ]
+          },
+          "commandType" : {
+            "type" : "string",
+            "description" : "Identifier or type of the command to bind."
           }
         }
       },
@@ -10790,6 +10862,31 @@
           }
         }
       },
+      "Entity" : {
+        "required" : [ "id", "position", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "position" : {
+            "$ref" : "#/components/schemas/Point"
+          }
+        },
+        "description" : "Entities could be anything in a game world, including characters, items, or obstacles."
+      },
+      "EntityProperties" : {
+        "required" : [ "position" ],
+        "type" : "object",
+        "properties" : {
+          "position" : {
+            "$ref" : "#/components/schemas/Point"
+          }
+        }
+      },
       "ErrorResponse" : {
         "required" : [ "error" ],
         "type" : "object",
@@ -10974,6 +11071,16 @@
           "result" : {
             "type" : "number",
             "description" : "The result of the Fermi function calculation."
+          }
+        }
+      },
+      "FireCommand" : {
+        "required" : [ "actorId" ],
+        "type" : "object",
+        "properties" : {
+          "actorId" : {
+            "type" : "string",
+            "description" : "The ID of the actor to execute the fire command on."
           }
         }
       },
@@ -11309,6 +11416,43 @@
           }
         }
       },
+      "GameActor" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/OrientedRectangle"
+        }, {
+          "required" : [ "animationId", "inputHandlerId" ],
+          "type" : "object",
+          "properties" : {
+            "inputHandlerId" : {
+              "type" : "string",
+              "description" : "Reference to the actor's input handler."
+            },
+            "animationId" : {
+              "type" : "string",
+              "description" : "Reference to the actor's animation component."
+            }
+          }
+        } ]
+      },
+      "GameEntity" : {
+        "description" : "Represents advanced objects within the game that combine basic entity properties, spatial orientation, and unit behavior. This includes health as an additional attribute, making it suitable for representing complex characters or objects in the game world that interact with the environment, have health, and can move and orient themselves in specific directions.",
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/Entity"
+        }, {
+          "$ref" : "#/components/schemas/OrientedRectangle"
+        }, {
+          "$ref" : "#/components/schemas/Unit"
+        }, {
+          "required" : [ "health" ],
+          "type" : "object",
+          "properties" : {
+            "health" : {
+              "type" : "integer",
+              "description" : "The health points of the game entity, crucial for gameplay mechanics involving combat or environmental challenges."
+            }
+          }
+        } ]
+      },
       "GammadevRequest" : {
         "required" : [ "alph", "bet", "seed" ],
         "type" : "object",
@@ -11389,6 +11533,30 @@
           }
         }
       },
+      "Grid" : {
+        "required" : [ "cells", "id" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "A unique identifier for the grid."
+          },
+          "cells" : {
+            "type" : "array",
+            "description" : "A two-dimensional array representing the elements of the matrix, with each cell capable of holding a GameEntity or being empty.",
+            "items" : {
+              "type" : "array",
+              "items" : {
+                "description" : "A GameEntity object representing an entity in the cell, or null if the cell is empty.",
+                "nullable" : true,
+                "oneOf" : [ {
+                  "$ref" : "#/components/schemas/GameEntity"
+                } ]
+              }
+            }
+          }
+        }
+      },
       "ImproveRequest" : {
         "type" : "object",
         "properties" : {
@@ -11398,6 +11566,21 @@
             "items" : {
               "type" : "number"
             }
+          }
+        }
+      },
+      "InputCommand" : {
+        "required" : [ "direction", "unitId" ],
+        "type" : "object",
+        "properties" : {
+          "unitId" : {
+            "type" : "string",
+            "description" : "The ID of the unit to move."
+          },
+          "direction" : {
+            "type" : "string",
+            "description" : "The direction in which to move the unit.",
+            "enum" : [ "UP", "DOWN" ]
           }
         }
       },
@@ -11559,6 +11742,16 @@
                 "type" : "number"
               }
             }
+          }
+        }
+      },
+      "JumpCommandRequest" : {
+        "required" : [ "actorId" ],
+        "type" : "object",
+        "properties" : {
+          "actorId" : {
+            "type" : "string",
+            "description" : "The ID of the actor to perform or revert a jump."
           }
         }
       },
@@ -12487,6 +12680,18 @@
           }
         }
       },
+      "MoveUnitCommand" : {
+        "required" : [ "newPosition", "unitId" ],
+        "type" : "object",
+        "properties" : {
+          "unitId" : {
+            "type" : "string"
+          },
+          "newPosition" : {
+            "$ref" : "#/components/schemas/Point"
+          }
+        }
+      },
       "MpAddRequest" : {
         "required" : [ "u", "v" ],
         "type" : "object",
@@ -12864,6 +13069,23 @@
           }
         }
       },
+      "OrientedRectangle" : {
+        "required" : [ "halfExtents", "position", "rotation" ],
+        "type" : "object",
+        "properties" : {
+          "position" : {
+            "$ref" : "#/components/schemas/Point"
+          },
+          "halfExtents" : {
+            "$ref" : "#/components/schemas/Vector"
+          },
+          "rotation" : {
+            "type" : "number",
+            "description" : "The rotation angle of the rectangle in degrees or radians (depending on your application's convention).",
+            "format" : "float"
+          }
+        }
+      },
       "PSPageResponse" : {
         "type" : "object",
         "properties" : {
@@ -13011,6 +13233,9 @@
             "nullable" : true
           }
         }
+      },
+      "PhysicsComponent" : {
+        "type" : "object"
       },
       "Plog" : {
         "required" : [ "dat", "ndat", "slogtau", "stau" ],
@@ -13176,6 +13401,17 @@
           },
           "np" : {
             "type" : "integer"
+          }
+        }
+      },
+      "PolyLine" : {
+        "type" : "object",
+        "properties" : {
+          "points" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Point"
+            }
           }
         }
       },
@@ -13768,6 +14004,21 @@
           }
         }
       },
+      "Rectangle2D" : {
+        "required" : [ "origin", "size" ],
+        "type" : "object",
+        "properties" : {
+          "origin" : {
+            "$ref" : "#/components/schemas/Point"
+          },
+          "size" : {
+            "$ref" : "#/components/schemas/Vector"
+          }
+        }
+      },
+      "RenderComponent" : {
+        "type" : "object"
+      },
       "RungeKuttaRequest" : {
         "required" : [ "dydx", "h", "x", "y" ],
         "type" : "object",
@@ -14268,6 +14519,20 @@
           }
         }
       },
+      "Skeleton" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/GameEntity"
+        }, {
+          "required" : [ "patrollingLeft" ],
+          "type" : "object",
+          "properties" : {
+            "patrollingLeft" : {
+              "type" : "boolean",
+              "description" : "Indicates if the skeleton is currently patrolling left."
+            }
+          }
+        } ]
+      },
       "SobolSequenceRequest" : {
         "required" : [ "n" ],
         "type" : "object",
@@ -14745,6 +15010,20 @@
           }
         }
       },
+      "Statue" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/GameEntity"
+        }, {
+          "required" : [ "delay" ],
+          "type" : "object",
+          "properties" : {
+            "delay" : {
+              "type" : "integer",
+              "description" : "Frames delay before performing the lightning action."
+            }
+          }
+        } ]
+      },
       "StringAlignmentRequest" : {
         "type" : "object",
         "properties" : {
@@ -14915,6 +15194,24 @@
             }
           }
         }
+      },
+      "Unit" : {
+        "required" : [ "id", "position" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "A unique identifier for the unit."
+          },
+          "position" : {
+            "$ref" : "#/components/schemas/Point"
+          },
+          "patrollingLeft" : {
+            "type" : "boolean",
+            "description" : "Indicates if the unit is currently patrolling to the left."
+          }
+        },
+        "description" : "Represents a dynamic entity within the game world, capable of moving, performing actions, and interacting with the environment and other entities. Each unit has a unique position in the game grid, defined by X and Y coordinates, and can patrol within the game environment, changing direction based on defined behaviors or player interactions. The unit schema encapsulates the essential attributes required for these functionalities, including its current position on the grid and its patrolling state.\n\nThe `move` method allows for updating the unit's position, facilitating movement across the game world. The `update` method enables the unit to autonomously change its position or state based on elapsed time, simulating behaviors such as patrolling. Rendering the unit within the game's graphical interface is handled by the `render` method, which draws the unit at its current position with specified visual characteristics.\n"
       },
       "UnsymmeigRequest" : {
         "required" : [ "matrix" ],
@@ -15293,6 +15590,42 @@
           }
         }
       },
+      "circleCircleIntersection_body" : {
+        "required" : [ "circle1", "circle2" ],
+        "type" : "object",
+        "properties" : {
+          "circle1" : {
+            "$ref" : "#/components/schemas/Circle"
+          },
+          "circle2" : {
+            "$ref" : "#/components/schemas/Circle"
+          }
+        }
+      },
+      "circleOrientedRectangleIntersection_body" : {
+        "required" : [ "circle", "orientedRectangle" ],
+        "type" : "object",
+        "properties" : {
+          "circle" : {
+            "$ref" : "#/components/schemas/Circle"
+          },
+          "orientedRectangle" : {
+            "$ref" : "#/components/schemas/OrientedRectangle"
+          }
+        }
+      },
+      "circleRectangleIntersection_body" : {
+        "required" : [ "circle", "rectangle" ],
+        "type" : "object",
+        "properties" : {
+          "circle" : {
+            "$ref" : "#/components/schemas/Circle"
+          },
+          "rectangle" : {
+            "$ref" : "#/components/schemas/Rectangle2D"
+          }
+        }
+      },
       "cosft1_body" : {
         "type" : "object",
         "properties" : {
@@ -15400,6 +15733,17 @@
             "type" : "string",
             "description" : "Specify the operation: pdf, cdf, or invcdf.",
             "enum" : [ "pdf", "cdf", "invcdf" ]
+          }
+        }
+      },
+      "entity_move_body" : {
+        "type" : "object",
+        "properties" : {
+          "entityId" : {
+            "type" : "string"
+          },
+          "newPosition" : {
+            "$ref" : "#/components/schemas/Point"
           }
         }
       },
@@ -15759,6 +16103,67 @@
           "number" : {
             "type" : "integer",
             "description" : "The integer to encode to Gray code."
+          }
+        }
+      },
+      "grid_body" : {
+        "required" : [ "ncols", "nrows" ],
+        "type" : "object",
+        "properties" : {
+          "nrows" : {
+            "type" : "integer",
+            "description" : "The number of rows in the grid."
+          },
+          "ncols" : {
+            "type" : "integer",
+            "description" : "The number of columns in the grid."
+          },
+          "cells" : {
+            "type" : "array",
+            "description" : "Optional. A two-dimensional array representing the initial placements of GameEntities in the grid. If not provided, the grid will be initialized with all cells empty.",
+            "items" : {
+              "type" : "array",
+              "items" : {
+                "description" : "A GameEntity object representing an entity in the cell, or null if the cell is empty. Each GameEntity should include all necessary properties as defined in the GameEntity schema.",
+                "oneOf" : [ {
+                  "$ref" : "#/components/schemas/GameEntity"
+                }, {
+                  "type" : "object",
+                  "nullable" : true
+                } ]
+              }
+            }
+          }
+        }
+      },
+      "grid_gridId_body" : {
+        "type" : "object",
+        "properties" : {
+          "updates" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/gridgridId_updates"
+            }
+          }
+        },
+        "description" : "A list of cell updates, each specifying a Point for coordinates and a new GameEntity or null for the cell."
+      },
+      "gridgridId_updates" : {
+        "required" : [ "position", "value" ],
+        "type" : "object",
+        "properties" : {
+          "position" : {
+            "$ref" : "#/components/schemas/Point"
+          },
+          "contents" : {
+            "description" : "The GameEntity to place in the cell, or null to empty the cell.",
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/GameEntity"
+            }, {
+              "type" : "object",
+              "description" : "This can be null to signify that the cell is to be emptied.",
+              "nullable" : true
+            } ]
           }
         }
       },
@@ -16846,6 +17251,83 @@
           }
         }
       },
+      "inline_response_200_72" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "Jump undone, actor returned to initial position."
+          }
+        }
+      },
+      "inline_response_200_73" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "Actor jumped successfully."
+          }
+        }
+      },
+      "inline_response_200_74" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "Command bound to button successfully."
+          }
+        }
+      },
+      "inline_response_200_75" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "example" : "Command executed successfully."
+          }
+        }
+      },
+      "inline_response_200_76" : {
+        "type" : "object",
+        "properties" : {
+          "aiComponent" : {
+            "$ref" : "#/components/schemas/AIComponent"
+          },
+          "physicsComponent" : {
+            "$ref" : "#/components/schemas/PhysicsComponent"
+          },
+          "renderComponent" : {
+            "$ref" : "#/components/schemas/RenderComponent"
+          }
+        }
+      },
+      "inline_response_200_77" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "Fire command undone for actor."
+          }
+        }
+      },
+      "inline_response_200_78" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "Fire command executed on actor."
+          }
+        }
+      },
+      "inline_response_200_79" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "Executing ConcreteCommand"
+          }
+        }
+      },
       "inline_response_200_8" : {
         "type" : "object",
         "properties" : {
@@ -16863,6 +17345,38 @@
           }
         }
       },
+      "inline_response_200_80" : {
+        "type" : "object",
+        "properties" : {
+          "intersects" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "inline_response_200_81" : {
+        "type" : "object",
+        "properties" : {
+          "isInOrientedRectangle" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "inline_response_200_82" : {
+        "type" : "object",
+        "properties" : {
+          "isInRectangle" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "inline_response_200_83" : {
+        "type" : "object",
+        "properties" : {
+          "isInCircle" : {
+            "type" : "boolean"
+          }
+        }
+      },
       "inline_response_200_9" : {
         "type" : "object",
         "properties" : {
@@ -16873,6 +17387,32 @@
           "frac" : {
             "type" : "number",
             "description" : "Fraction of the day of the moon phase"
+          }
+        }
+      },
+      "inline_response_201" : {
+        "required" : [ "id", "orientedRectangle" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Unique identifier of the newly created OrientedRectangle."
+          },
+          "orientedRectangle" : {
+            "$ref" : "#/components/schemas/OrientedRectangle"
+          }
+        }
+      },
+      "inline_response_201_1" : {
+        "required" : [ "id", "rectangle" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The unique identifier of the newly created rectangle."
+          },
+          "rectangle" : {
+            "$ref" : "#/components/schemas/Rectangle2D"
           }
         }
       },
@@ -17077,6 +17617,42 @@
           "b" : {
             "type" : "number",
             "description" : "End value for the integral computation"
+          }
+        }
+      },
+      "lineCircleIntersection_body" : {
+        "required" : [ "circle", "line" ],
+        "type" : "object",
+        "properties" : {
+          "line" : {
+            "$ref" : "#/components/schemas/PolyLine"
+          },
+          "circle" : {
+            "$ref" : "#/components/schemas/Circle"
+          }
+        }
+      },
+      "lineOrientedRectangleIntersection_body" : {
+        "required" : [ "line", "orientedRectangle" ],
+        "type" : "object",
+        "properties" : {
+          "line" : {
+            "$ref" : "#/components/schemas/PolyLine"
+          },
+          "orientedRectangle" : {
+            "$ref" : "#/components/schemas/OrientedRectangle"
+          }
+        }
+      },
+      "lineRectangleIntersection_body" : {
+        "required" : [ "line", "rectangle" ],
+        "type" : "object",
+        "properties" : {
+          "line" : {
+            "$ref" : "#/components/schemas/PolyLine"
+          },
+          "rectangle" : {
+            "$ref" : "#/components/schemas/Rectangle2D"
           }
         }
       },
@@ -17300,6 +17876,54 @@
       "mcmcstep" : {
         "type" : "number",
         "description" : "The acceptance ratio for the MCMC step."
+      },
+      "orientedRectangleOrientedRectangleIntersection_body" : {
+        "required" : [ "rect1", "rect2" ],
+        "type" : "object",
+        "properties" : {
+          "rect1" : {
+            "$ref" : "#/components/schemas/OrientedRectangle"
+          },
+          "rect2" : {
+            "$ref" : "#/components/schemas/OrientedRectangle"
+          }
+        }
+      },
+      "pointInCircle_body" : {
+        "required" : [ "circle", "point" ],
+        "type" : "object",
+        "properties" : {
+          "point" : {
+            "$ref" : "#/components/schemas/Point"
+          },
+          "circle" : {
+            "$ref" : "#/components/schemas/Circle"
+          }
+        }
+      },
+      "pointInOrientedRectangle_body" : {
+        "required" : [ "orientedRectangle", "point" ],
+        "type" : "object",
+        "properties" : {
+          "point" : {
+            "$ref" : "#/components/schemas/Point"
+          },
+          "orientedRectangle" : {
+            "$ref" : "#/components/schemas/OrientedRectangle"
+          }
+        }
+      },
+      "pointInRectangle_body" : {
+        "required" : [ "point", "rectangle" ],
+        "type" : "object",
+        "properties" : {
+          "point" : {
+            "$ref" : "#/components/schemas/Point"
+          },
+          "rectangle" : {
+            "$ref" : "#/components/schemas/Rectangle2D"
+          }
+        }
       },
       "polygon_checkPointInside_body" : {
         "required" : [ "point", "polygon" ],
@@ -17525,6 +18149,42 @@
           "isign" : {
             "type" : "integer",
             "description" : "Direction of the FFT (1 for forward, -1 for inverse)."
+          }
+        }
+      },
+      "rectangleOrientedRectangleIntersection_body" : {
+        "required" : [ "rect1", "rect2" ],
+        "type" : "object",
+        "properties" : {
+          "rect1" : {
+            "$ref" : "#/components/schemas/Rectangle2D"
+          },
+          "rect2" : {
+            "$ref" : "#/components/schemas/OrientedRectangle"
+          }
+        }
+      },
+      "rectangleRectangleIntersection_body" : {
+        "required" : [ "rect1", "rect2" ],
+        "type" : "object",
+        "properties" : {
+          "rect1" : {
+            "$ref" : "#/components/schemas/Rectangle2D"
+          },
+          "rect2" : {
+            "$ref" : "#/components/schemas/Rectangle2D"
+          }
+        }
+      },
+      "rectangleRectangleSAT_body" : {
+        "required" : [ "rect1", "rect2" ],
+        "type" : "object",
+        "properties" : {
+          "rect1" : {
+            "$ref" : "#/components/schemas/Rectangle2D"
+          },
+          "rect2" : {
+            "$ref" : "#/components/schemas/Rectangle2D"
           }
         }
       },
@@ -18000,6 +18660,38 @@
           }
         }
       },
+      "unitId_position_body" : {
+        "type" : "object",
+        "properties" : {
+          "position" : {
+            "$ref" : "#/components/schemas/Point"
+          }
+        }
+      },
+      "update_position_body" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The ID of the rectangle to update."
+          },
+          "newOrigin" : {
+            "$ref" : "#/components/schemas/Point"
+          }
+        }
+      },
+      "update_size_body" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The ID of the rectangle to update."
+          },
+          "newSize" : {
+            "$ref" : "#/components/schemas/Vector"
+          }
+        }
+      },
       "weights_body" : {
         "required" : [ "h", "n" ],
         "type" : "object",
@@ -18033,656 +18725,6 @@
           "sampleSize" : {
             "type" : "integer",
             "description" : "The size of the sample."
-          }
-        }
-      },
-      "Rectangle2D" : {
-        "required" : [ "origin", "size" ],
-        "type" : "object",
-        "properties" : {
-          "origin" : {
-            "$ref" : "#/components/schemas/Point"
-          },
-          "size" : {
-            "$ref" : "#/components/schemas/Vector"
-          }
-        }
-      },
-      "OrientedRectangle" : {
-        "required" : [ "halfExtents", "position", "rotation" ],
-        "type" : "object",
-        "properties" : {
-          "position" : {
-            "$ref" : "#/components/schemas/Point"
-          },
-          "halfExtents" : {
-            "$ref" : "#/components/schemas/Vector"
-          },
-          "rotation" : {
-            "type" : "number",
-            "description" : "The rotation angle of the rectangle in degrees or radians (depending on your application's convention).",
-            "format" : "float"
-          }
-        }
-      },
-      "PolyLine" : {
-        "type" : "object",
-        "properties" : {
-          "points" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Point"
-            }
-          }
-        }
-      },
-      "GameEntity" : {
-        "description" : "Represents advanced objects within the game that combine basic entity properties, spatial orientation, and unit behavior. This includes health as an additional attribute, making it suitable for representing complex characters or objects in the game world that interact with the environment, have health, and can move and orient themselves in specific directions.",
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/Entity"
-        }, {
-          "$ref" : "#/components/schemas/OrientedRectangle"
-        }, {
-          "$ref" : "#/components/schemas/Unit"
-        }, {
-          "required" : [ "health" ],
-          "type" : "object",
-          "properties" : {
-            "health" : {
-              "type" : "integer",
-              "description" : "The health points of the game entity, crucial for gameplay mechanics involving combat or environmental challenges."
-            }
-          }
-        } ]
-      },
-      "Command" : {
-        "required" : [ "action", "entityId" ],
-        "type" : "object",
-        "properties" : {
-          "entityId" : {
-            "type" : "string"
-          },
-          "action" : {
-            "type" : "string"
-          }
-        },
-        "description" : "Represents an action that can be executed in the game, such as moving an entity or firing a weapon."
-      },
-      "Unit" : {
-        "required" : [ "id", "position" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "description" : "A unique identifier for the unit."
-          },
-          "position" : {
-            "$ref" : "#/components/schemas/Point"
-          },
-          "patrollingLeft" : {
-            "type" : "boolean",
-            "description" : "Indicates if the unit is currently patrolling to the left."
-          }
-        },
-        "description" : "Represents a dynamic entity within the game world, capable of moving, performing actions, and interacting with the environment and other entities. Each unit has a unique position in the game grid, defined by X and Y coordinates, and can patrol within the game environment, changing direction based on defined behaviors or player interactions. The unit schema encapsulates the essential attributes required for these functionalities, including its current position on the grid and its patrolling state.\n\nThe `move` method allows for updating the unit's position, facilitating movement across the game world. The `update` method enables the unit to autonomously change its position or state based on elapsed time, simulating behaviors such as patrolling. Rendering the unit within the game's graphical interface is handled by the `render` method, which draws the unit at its current position with specified visual characteristics.\n"
-      },
-      "MoveUnitCommand" : {
-        "required" : [ "newPosition", "unitId" ],
-        "type" : "object",
-        "properties" : {
-          "unitId" : {
-            "type" : "string"
-          },
-          "newPosition" : {
-            "$ref" : "#/components/schemas/Point"
-          }
-        }
-      },
-      "Entity" : {
-        "required" : [ "id", "position", "type" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "string"
-          },
-          "position" : {
-            "$ref" : "#/components/schemas/Point"
-          }
-        },
-        "description" : "Entities could be anything in a game world, including characters, items, or obstacles."
-      },
-      "FireCommand" : {
-        "required" : [ "actorId" ],
-        "type" : "object",
-        "properties" : {
-          "actorId" : {
-            "type" : "string",
-            "description" : "The ID of the actor to execute the fire command on."
-          }
-        }
-      },
-      "AIComponent" : {
-        "type" : "object"
-      },
-      "PhysicsComponent" : {
-        "type" : "object"
-      },
-      "RenderComponent" : {
-        "type" : "object"
-      },
-      "Grid" : {
-        "required" : [ "cells", "id" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "description" : "A unique identifier for the grid."
-          },
-          "cells" : {
-            "type" : "array",
-            "description" : "A two-dimensional array representing the elements of the matrix, with each cell capable of holding a GameEntity or being empty.",
-            "items" : {
-              "type" : "array",
-              "items" : {
-                "description" : "A GameEntity object representing an entity in the cell, or null if the cell is empty.",
-                "nullable" : true,
-                "oneOf" : [ {
-                  "$ref" : "#/components/schemas/GameEntity"
-                } ]
-              }
-            }
-          }
-        }
-      },
-      "InputCommand" : {
-        "required" : [ "direction", "unitId" ],
-        "type" : "object",
-        "properties" : {
-          "unitId" : {
-            "type" : "string",
-            "description" : "The ID of the unit to move."
-          },
-          "direction" : {
-            "type" : "string",
-            "description" : "The direction in which to move the unit.",
-            "enum" : [ "UP", "DOWN" ]
-          }
-        }
-      },
-      "CommandBinding" : {
-        "required" : [ "button", "commandType" ],
-        "type" : "object",
-        "properties" : {
-          "button" : {
-            "type" : "string",
-            "enum" : [ "BUTTON_X", "BUTTON_Y", "BUTTON_A", "BUTTON_B" ]
-          },
-          "commandType" : {
-            "type" : "string",
-            "description" : "Identifier or type of the command to bind."
-          }
-        }
-      },
-      "JumpCommandRequest" : {
-        "required" : [ "actorId" ],
-        "type" : "object",
-        "properties" : {
-          "actorId" : {
-            "type" : "string",
-            "description" : "The ID of the actor to perform or revert a jump."
-          }
-        }
-      },
-      "EntityProperties" : {
-        "required" : [ "position" ],
-        "type" : "object",
-        "properties" : {
-          "position" : {
-            "$ref" : "#/components/schemas/Point"
-          }
-        }
-      },
-      "GameActor" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/OrientedRectangle"
-        }, {
-          "required" : [ "animationId", "inputHandlerId" ],
-          "type" : "object",
-          "properties" : {
-            "inputHandlerId" : {
-              "type" : "string",
-              "description" : "Reference to the actor's input handler."
-            },
-            "animationId" : {
-              "type" : "string",
-              "description" : "Reference to the actor's animation component."
-            }
-          }
-        } ]
-      },
-      "Skeleton" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/GameEntity"
-        }, {
-          "required" : [ "patrollingLeft" ],
-          "type" : "object",
-          "properties" : {
-            "patrollingLeft" : {
-              "type" : "boolean",
-              "description" : "Indicates if the skeleton is currently patrolling left."
-            }
-          }
-        } ]
-      },
-      "Statue" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/GameEntity"
-        }, {
-          "required" : [ "delay" ],
-          "type" : "object",
-          "properties" : {
-            "delay" : {
-              "type" : "integer",
-              "description" : "Frames delay before performing the lightning action."
-            }
-          }
-        } ]
-      },
-      "gridgridId_updates" : {
-        "required" : [ "position", "value" ],
-        "type" : "object",
-        "properties" : {
-          "position" : {
-            "$ref" : "#/components/schemas/Point"
-          },
-          "contents" : {
-            "description" : "The GameEntity to place in the cell, or null to empty the cell.",
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/GameEntity"
-            }, {
-              "type" : "object",
-              "description" : "This can be null to signify that the cell is to be emptied.",
-              "nullable" : true
-            } ]
-          }
-        }
-      },
-      "grid_gridId_body" : {
-        "type" : "object",
-        "properties" : {
-          "updates" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/gridgridId_updates"
-            }
-          }
-        },
-        "description" : "A list of cell updates, each specifying a Point for coordinates and a new GameEntity or null for the cell."
-      },
-      "unitId_position_body" : {
-        "type" : "object",
-        "properties" : {
-          "position" : {
-            "$ref" : "#/components/schemas/Point"
-          }
-        }
-      },
-      "inline_response_200_72" : {
-        "type" : "object",
-        "properties" : {
-          "message" : {
-            "type" : "string",
-            "example" : "Jump undone, actor returned to initial position."
-          }
-        }
-      },
-      "inline_response_200_73" : {
-        "type" : "object",
-        "properties" : {
-          "message" : {
-            "type" : "string",
-            "example" : "Actor jumped successfully."
-          }
-        }
-      },
-      "inline_response_200_74" : {
-        "type" : "object",
-        "properties" : {
-          "message" : {
-            "type" : "string",
-            "example" : "Command bound to button successfully."
-          }
-        }
-      },
-      "inline_response_200_75" : {
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string",
-            "example" : "Command executed successfully."
-          }
-        }
-      },
-      "grid_body" : {
-        "required" : [ "ncols", "nrows" ],
-        "type" : "object",
-        "properties" : {
-          "nrows" : {
-            "type" : "integer",
-            "description" : "The number of rows in the grid."
-          },
-          "ncols" : {
-            "type" : "integer",
-            "description" : "The number of columns in the grid."
-          },
-          "cells" : {
-            "type" : "array",
-            "description" : "Optional. A two-dimensional array representing the initial placements of GameEntities in the grid. If not provided, the grid will be initialized with all cells empty.",
-            "items" : {
-              "type" : "array",
-              "items" : {
-                "description" : "A GameEntity object representing an entity in the cell, or null if the cell is empty. Each GameEntity should include all necessary properties as defined in the GameEntity schema.",
-                "oneOf" : [ {
-                  "$ref" : "#/components/schemas/GameEntity"
-                }, {
-                  "type" : "object",
-                  "nullable" : true
-                } ]
-              }
-            }
-          }
-        }
-      },
-      "inline_response_200_76" : {
-        "type" : "object",
-        "properties" : {
-          "aiComponent" : {
-            "$ref" : "#/components/schemas/AIComponent"
-          },
-          "physicsComponent" : {
-            "$ref" : "#/components/schemas/PhysicsComponent"
-          },
-          "renderComponent" : {
-            "$ref" : "#/components/schemas/RenderComponent"
-          }
-        }
-      },
-      "inline_response_200_77" : {
-        "type" : "object",
-        "properties" : {
-          "message" : {
-            "type" : "string",
-            "example" : "Fire command undone for actor."
-          }
-        }
-      },
-      "inline_response_200_78" : {
-        "type" : "object",
-        "properties" : {
-          "message" : {
-            "type" : "string",
-            "example" : "Fire command executed on actor."
-          }
-        }
-      },
-      "inline_response_200_79" : {
-        "type" : "object",
-        "properties" : {
-          "message" : {
-            "type" : "string",
-            "example" : "Executing ConcreteCommand"
-          }
-        }
-      },
-      "entity_move_body" : {
-        "type" : "object",
-        "properties" : {
-          "entityId" : {
-            "type" : "string"
-          },
-          "newPosition" : {
-            "$ref" : "#/components/schemas/Point"
-          }
-        }
-      },
-      "orientedRectangleOrientedRectangleIntersection_body" : {
-        "required" : [ "rect1", "rect2" ],
-        "type" : "object",
-        "properties" : {
-          "rect1" : {
-            "$ref" : "#/components/schemas/OrientedRectangle"
-          },
-          "rect2" : {
-            "$ref" : "#/components/schemas/OrientedRectangle"
-          }
-        }
-      },
-      "inline_response_200_80" : {
-        "type" : "object",
-        "properties" : {
-          "intersects" : {
-            "type" : "boolean"
-          }
-        }
-      },
-      "rectangleOrientedRectangleIntersection_body" : {
-        "required" : [ "rect1", "rect2" ],
-        "type" : "object",
-        "properties" : {
-          "rect1" : {
-            "$ref" : "#/components/schemas/Rectangle2D"
-          },
-          "rect2" : {
-            "$ref" : "#/components/schemas/OrientedRectangle"
-          }
-        }
-      },
-      "rectangleRectangleSAT_body" : {
-        "required" : [ "rect1", "rect2" ],
-        "type" : "object",
-        "properties" : {
-          "rect1" : {
-            "$ref" : "#/components/schemas/Rectangle2D"
-          },
-          "rect2" : {
-            "$ref" : "#/components/schemas/Rectangle2D"
-          }
-        }
-      },
-      "rectangleRectangleIntersection_body" : {
-        "required" : [ "rect1", "rect2" ],
-        "type" : "object",
-        "properties" : {
-          "rect1" : {
-            "$ref" : "#/components/schemas/Rectangle2D"
-          },
-          "rect2" : {
-            "$ref" : "#/components/schemas/Rectangle2D"
-          }
-        }
-      },
-      "circleOrientedRectangleIntersection_body" : {
-        "required" : [ "circle", "orientedRectangle" ],
-        "type" : "object",
-        "properties" : {
-          "circle" : {
-            "$ref" : "#/components/schemas/Circle"
-          },
-          "orientedRectangle" : {
-            "$ref" : "#/components/schemas/OrientedRectangle"
-          }
-        }
-      },
-      "circleRectangleIntersection_body" : {
-        "required" : [ "circle", "rectangle" ],
-        "type" : "object",
-        "properties" : {
-          "circle" : {
-            "$ref" : "#/components/schemas/Circle"
-          },
-          "rectangle" : {
-            "$ref" : "#/components/schemas/Rectangle2D"
-          }
-        }
-      },
-      "circleCircleIntersection_body" : {
-        "required" : [ "circle1", "circle2" ],
-        "type" : "object",
-        "properties" : {
-          "circle1" : {
-            "$ref" : "#/components/schemas/Circle"
-          },
-          "circle2" : {
-            "$ref" : "#/components/schemas/Circle"
-          }
-        }
-      },
-      "lineOrientedRectangleIntersection_body" : {
-        "required" : [ "line", "orientedRectangle" ],
-        "type" : "object",
-        "properties" : {
-          "line" : {
-            "$ref" : "#/components/schemas/PolyLine"
-          },
-          "orientedRectangle" : {
-            "$ref" : "#/components/schemas/OrientedRectangle"
-          }
-        }
-      },
-      "lineRectangleIntersection_body" : {
-        "required" : [ "line", "rectangle" ],
-        "type" : "object",
-        "properties" : {
-          "line" : {
-            "$ref" : "#/components/schemas/PolyLine"
-          },
-          "rectangle" : {
-            "$ref" : "#/components/schemas/Rectangle2D"
-          }
-        }
-      },
-      "lineCircleIntersection_body" : {
-        "required" : [ "circle", "line" ],
-        "type" : "object",
-        "properties" : {
-          "line" : {
-            "$ref" : "#/components/schemas/PolyLine"
-          },
-          "circle" : {
-            "$ref" : "#/components/schemas/Circle"
-          }
-        }
-      },
-      "pointInOrientedRectangle_body" : {
-        "required" : [ "orientedRectangle", "point" ],
-        "type" : "object",
-        "properties" : {
-          "point" : {
-            "$ref" : "#/components/schemas/Point"
-          },
-          "orientedRectangle" : {
-            "$ref" : "#/components/schemas/OrientedRectangle"
-          }
-        }
-      },
-      "inline_response_200_81" : {
-        "type" : "object",
-        "properties" : {
-          "isInOrientedRectangle" : {
-            "type" : "boolean"
-          }
-        }
-      },
-      "pointInRectangle_body" : {
-        "required" : [ "point", "rectangle" ],
-        "type" : "object",
-        "properties" : {
-          "point" : {
-            "$ref" : "#/components/schemas/Point"
-          },
-          "rectangle" : {
-            "$ref" : "#/components/schemas/Rectangle2D"
-          }
-        }
-      },
-      "inline_response_200_82" : {
-        "type" : "object",
-        "properties" : {
-          "isInRectangle" : {
-            "type" : "boolean"
-          }
-        }
-      },
-      "pointInCircle_body" : {
-        "required" : [ "circle", "point" ],
-        "type" : "object",
-        "properties" : {
-          "point" : {
-            "$ref" : "#/components/schemas/Point"
-          },
-          "circle" : {
-            "$ref" : "#/components/schemas/Circle"
-          }
-        }
-      },
-      "inline_response_200_83" : {
-        "type" : "object",
-        "properties" : {
-          "isInCircle" : {
-            "type" : "boolean"
-          }
-        }
-      },
-      "inline_response_201" : {
-        "required" : [ "id", "orientedRectangle" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "description" : "Unique identifier of the newly created OrientedRectangle."
-          },
-          "orientedRectangle" : {
-            "$ref" : "#/components/schemas/OrientedRectangle"
-          }
-        }
-      },
-      "inline_response_201_1" : {
-        "required" : [ "id", "rectangle" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "description" : "The unique identifier of the newly created rectangle."
-          },
-          "rectangle" : {
-            "$ref" : "#/components/schemas/Rectangle2D"
-          }
-        }
-      },
-      "update_position_body" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "description" : "The ID of the rectangle to update."
-          },
-          "newOrigin" : {
-            "$ref" : "#/components/schemas/Point"
-          }
-        }
-      },
-      "update_size_body" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "description" : "The ID of the rectangle to update."
-          },
-          "newSize" : {
-            "$ref" : "#/components/schemas/Vector"
           }
         }
       }
