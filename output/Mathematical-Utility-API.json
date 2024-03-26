@@ -10748,15 +10748,11 @@
         }
       },
       "DrawPolylineRequest" : {
-        "required" : [ "points" ],
+        "required" : [ "polyline" ],
         "type" : "object",
         "properties" : {
-          "points" : {
-            "type" : "array",
-            "description" : "Array of points defining the polyline.",
-            "items" : {
-              "$ref" : "#/components/schemas/Point"
-            }
+          "polyline" : {
+            "$ref" : "#/components/schemas/PolyLine"
           },
           "close" : {
             "type" : "boolean",
